@@ -8,6 +8,6 @@
 
     http://.....
 
-## DOKUMENTASI
+## DOKUMENTASI API
 
-    https://swagger.io/
+    https://..../docs/index.html
