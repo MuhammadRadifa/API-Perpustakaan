@@ -7,6 +7,48 @@ import OtpValidator from 'App/Validators/OtpValidator'
 import ProfileValidator from 'App/Validators/ProfileValidator'
 
 export default class AuthController {
+  /**
+   * @swagger
+   * path:
+   * /api/v1/register:
+   *    post:
+   *     tags:
+   *       - Authorization
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           description: User payload
+   *           schema:
+   *             type: object
+   *             properties:
+   *               nama:
+   *                 type: string
+   *                 example: 'James Bond'
+   *                 required: true
+   *               email:
+   *                 type: string
+   *                 example: 'Bond007@example.com'
+   *                 required: true
+   *               password:
+   *                 type: string
+   *                 example: 'Bond007'
+   *                 required: true
+   *               confirm:
+   *                 type: string
+   *                 example: 'Bond007'
+   *                 required: true
+   *               role:
+   *                 type: string
+   *                 enum:
+   *                  - user
+   *                  - admin
+   *                 required: false
+   *     responses:
+   *       200:
+   *         description: Success
+   *
+   */
   public async register({ request, response }: HttpContextContract) {
     try {
       const dataValidation = await request.validate(RegisterValidator)
@@ -33,7 +75,34 @@ export default class AuthController {
       })
     }
   }
-
+  /**
+   * @swagger
+   * path:
+   * /api/v1/login:
+   *    post:
+   *     tags:
+   *       - Authorization
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           description: User payload
+   *           schema:
+   *             type: object
+   *             properties:
+   *               email:
+   *                 type: string
+   *                 example: 'Bond007@example.com'
+   *                 required: true
+   *               password:
+   *                 type: string
+   *                 example: 'Bond007'
+   *                 required: true
+   *     responses:
+   *       200:
+   *         description: Success
+   *
+   */
   public async login({ request, response, auth }: HttpContextContract) {
     try {
       const { email, password } = await request.validate(LoginValidator)
@@ -61,6 +130,34 @@ export default class AuthController {
       })
     }
   }
+  /**
+   * @swagger
+   * path:
+   * /api/v1/otp-confirmation:
+   *    post:
+   *     tags:
+   *       - Authorization
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           description: User payload
+   *           schema:
+   *             type: object
+   *             properties:
+   *               email:
+   *                 type: string
+   *                 example: 'Bond007@example.com'
+   *                 required: true
+   *               otpcode:
+   *                 type: number
+   *                 example: '226717'
+   *                 required: true
+   *     responses:
+   *       200:
+   *         description: Success
+   *
+   */
   public async confirmOtp({ request, response }: HttpContextContract) {
     try {
       const dataValidation = await request.validate(OtpValidator)
@@ -94,7 +191,36 @@ export default class AuthController {
       })
     }
   }
-
+  /**
+   * @swagger
+   * path:
+   * /api/v1/profile:
+   *    post:
+   *     security:
+   *      - bearerAuth: []
+   *     tags:
+   *       - Authorization
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           description: User payload
+   *           schema:
+   *             type: object
+   *             properties:
+   *               bio:
+   *                 type: string
+   *                 example: 'hallo im james bond'
+   *                 required: true
+   *               alamat:
+   *                 type: number
+   *                 example: 'jl.california a450'
+   *                 required: true
+   *     responses:
+   *       200:
+   *         description: Success
+   *
+   */
   public async profile({ request, response, auth }: HttpContextContract) {
     try {
       const user = auth.user

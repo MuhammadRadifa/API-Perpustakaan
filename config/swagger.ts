@@ -12,9 +12,17 @@ export default {
     definition: {
       openapi: '3.0.0',
       info: {
-        title: 'Application with swagger docs',
+        title: 'API - Perpustakaan',
         version: '1.0.0',
-        description: 'My application with swagger docs',
+        description: 'Restfull Api menggunakan Adonis JS',
+      },
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+          },
+        },
       },
     },
 

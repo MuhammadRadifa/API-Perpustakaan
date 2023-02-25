@@ -11,3 +11,8 @@
 ## DOKUMENTASI API
 
     https://..../docs/index.html
+
+## AKUN USER
+
+    email    : admin@example.com
+    password : admin123
