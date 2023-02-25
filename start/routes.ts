@@ -26,20 +26,29 @@ import Route from '@ioc:Adonis/Core/Route'
 // })
 
 Route.group(() => {
-  //authorization
+  //authorization (admin & user)
   Route.get('/hello', 'TestsController.hello')
   Route.post('/register', 'AuthController.register')
   Route.post('/login', 'AuthController.login')
   Route.post('/otp-confirmation', 'AuthController.confirmOtp')
   Route.post('/profile', 'AuthController.profile').middleware('auth')
 
-  //kategori
+  //kategori (admin)
   Route.resource('/kategori', 'KategorisController')
     .apiOnly()
     .middleware({ '*': ['auth', 'admin'] })
 
-  //buku
+  //buku (admin)
   Route.resource('/buku', 'BukusController')
     .apiOnly()
     .middleware({ '*': ['auth', 'admin'] })
+
+  Route.group(() => {
+    //peminjaman buku (user)
+    Route.post('/buku/:id/peminjaman', 'PeminjamanController.store')
+
+    //peminjaman (user)
+    Route.get('/peminjaman', 'PeminjamanController.index')
+    Route.get('/peminjaman/:id', 'PeminjamanController.show')
+  }).middleware(['auth'])
 }).prefix('api/v1')
