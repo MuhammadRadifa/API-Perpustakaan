@@ -1,9 +1,5 @@
 # API SISTEM INFORMASI PERPUSTAKAAN
 
-### Author : Muhammad Radifa
-
-### Email : m.difa123456@gmail.com
-
 ## ERD
 
 ![ERD!](./ERD.png 'ERD')
